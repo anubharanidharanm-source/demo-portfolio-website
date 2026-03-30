@@ -23,12 +23,12 @@
 
 //     }
 // }
-
 pipeline {
     agent { label 'GCP-Jenkins-Agent' }
 
     environment {
         IMAGE_NAME = "anubharani/portfolio-website"
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
@@ -41,7 +41,10 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                sh '''
+                docker build -t $IMAGE_NAME:$IMAGE_TAG .
+                docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+                '''
             }
         }
 
@@ -50,6 +53,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    
+                    docker push $IMAGE_NAME:$IMAGE_TAG
                     docker push $IMAGE_NAME:latest
                     '''
                 }
@@ -60,7 +65,7 @@ pipeline {
             steps {
                 sh '''
                 docker rm -f portfolio-container || true
-                docker run -d -p 8091:80 $IMAGE_NAME:latest
+                docker run -d -p 8091:80 --name portfolio-container $IMAGE_NAME:$IMAGE_TAG
                 '''
             }
         }
