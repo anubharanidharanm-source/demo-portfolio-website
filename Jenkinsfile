@@ -1,11 +1,11 @@
 pipeline {
-    agent { label 'gcp-agent' }
+    agent { label 'GCP-Jenkins-Agent' }
 
     stages {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/anubharanidharanm-source/demo-portfolio-website.git'
+                git branch: 'main', url: 'https://github.com/anubharanidharanm-source/demo-portfolio-website.git'
             }
         }
 
@@ -17,7 +17,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8081:80 portfolio-app'
+                sh 'docker run -d -p 8081:80 --name portfolio-container portfolio-app'
             }
         }
 
