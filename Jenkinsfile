@@ -1,28 +1,3 @@
-// pipeline {
-//     agent { label 'GCP-Jenkins-Agent' }
-
-//     stages {
-
-//         stage('Clone Repo') {
-//             steps {
-//                 git branch: 'main', url: 'https://github.com/anubharanidharanm-source/demo-portfolio-website.git'
-//             }
-//         }
-
-//         stage('Build Docker Image') {
-//             steps {
-//                 sh 'docker build -t portfolio-app .'
-//             }
-//         }
-
-//         stage('Run Container') {
-//             steps {
-//                 sh 'docker run -d -p 8090:80 --name portfolio-container portfolio-app'
-//             }
-//         }
-
-//     }
-// }
 pipeline {
     agent { label 'GCP-Jenkins-Agent' }
 
@@ -36,6 +11,23 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 git branch: 'main', url: 'https://github.com/anubharanidharanm-source/demo-portfolio-website.git'
+            }
+        }
+        stage('Lint or Validate') {
+            steps {
+                sh '''
+                # Install node modules if not present
+                npm install -g htmlhint stylelint eslint
+
+                echo "Running HTMLHint..."
+                htmlhint **/*.html
+
+                echo "Running Stylelint..."
+                stylelint **/*.css
+
+                echo "Running ESLint..."
+                eslint **/*.js || true  # continue even if warnings
+                '''
             }
         }
 
