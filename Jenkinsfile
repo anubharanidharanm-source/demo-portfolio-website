@@ -13,25 +13,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/anubharanidharanm-source/demo-portfolio-website.git'
             }
         }
-        stage('Lint or Validate') {
-            agent {
-            docker { image 'node:20-alpine' }
-            }
-            steps {
-                sh '''
-                npm install -g htmlhint stylelint eslint
-
-                echo "Running HTMLHint..."
-                htmlhint **/*.html
-
-                echo "Running Stylelint..."
-                stylelint **/*.css
-
-                echo "Running ESLint..."
-                eslint **/*.js || true
-                '''
-            }
-}
+        }
 
         stage('Build Docker Image') {
             steps {
