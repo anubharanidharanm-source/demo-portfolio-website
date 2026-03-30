@@ -89,12 +89,12 @@ pipeline {
                 sh """
                 docker run --rm \
                   --network host \
-                  -v "$(pwd)":/usr/src \
+                  -v "\$(pwd)":/usr/src \
                   sonarsource/sonar-scanner-cli:latest \
-                  -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+                  -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                   -Dsonar.sources=/usr/src \
-                  -Dsonar.host.url=$SONAR_HOST_URL \
-                  -Dsonar.login=$SONAR_LOGIN
+                  -Dsonar.host.url=${SONAR_HOST_URL} \
+                  -Dsonar.login=${SONAR_LOGIN}
                 """
             }
         }
@@ -102,10 +102,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh """
-                docker build -t $IMAGE_NAME:$IMAGE_TAG .
-                docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
-                docker tag $IMAGE_NAME:$IMAGE_TAG $GCP_ARTIFACT_IMAGE_NAME:$IMAGE_TAG
-                docker tag $IMAGE_NAME:$IMAGE_TAG $GCP_ARTIFACT_IMAGE_NAME:latest
+                docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
+                docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${GCP_ARTIFACT_IMAGE_NAME}:${IMAGE_TAG}
+                docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${GCP_ARTIFACT_IMAGE_NAME}:latest
                 """
             }
         }
@@ -114,9 +114,9 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh """
-                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker push $IMAGE_NAME:$IMAGE_TAG
-                    docker push $IMAGE_NAME:latest
+                    echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
+                    docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${IMAGE_NAME}:latest
                     """
                 }
             }
@@ -126,10 +126,10 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'gcp-service-account-json', variable: 'GCP_KEY')]) {
                     sh """
-                    gcloud auth activate-service-account --key-file=$GCP_KEY
+                    gcloud auth activate-service-account --key-file=${GCP_KEY}
                     gcloud auth configure-docker asia-south1-docker.pkg.dev
-                    docker push $GCP_ARTIFACT_IMAGE_NAME:$IMAGE_TAG
-                    docker push $GCP_ARTIFACT_IMAGE_NAME:latest
+                    docker push ${GCP_ARTIFACT_IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${GCP_ARTIFACT_IMAGE_NAME}:latest
                     """
                 }
             }
@@ -139,7 +139,7 @@ pipeline {
             steps {
                 sh """
                 docker rm -f portfolio-container || true
-                docker run -d -p 8091:80 --name portfolio-container $IMAGE_NAME:$IMAGE_TAG
+                docker run -d -p 8091:80 --name portfolio-container ${IMAGE_NAME}:${IMAGE_TAG}
                 """
             }
         }
