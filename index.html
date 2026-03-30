@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puneeth gowda's Portfolio</title>
+
+    <!-- /link sytle sheet -->
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- mediaqueries style sheet -->
+   
+    <link rel="stylesheet" href="mediaqueries.css">
+
+    <!-- cdnjs library -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+<body>
+
+    <!----------------- nav bar ----------------->
+
+    <nav id="desktop-nav">
+        <div class="logo">Puneeth Gowda</div>
+        <div>
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-------------- hamburger ----------------->
+
+      <nav id="hamburger-nav">
+        <div class="logo">Gowda</div>
+        <div class="hamburger-menu">
+          <div class="hamburger-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="menu-links">
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+            <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+          </div>
+        </div>
+      </nav>
+
+      <!-------------- home sections ------------->
+
+      <section id="profile">
+
+        <!-- profile pic -->
+
+        <div class="section__text">
+          <p class="section__text__p1">Hello, I'm</p>
+          <h1 class="title">Puneeth Gowda</h1>
+          <p class="section__text__p2">Frontend Developer</p>
+          <div class="btn-container">
+
+             <!-- resume -->
+            <button
+              class="btn btn-color-2"
+              onclick="location.href='https://drive.google.com/file/d/1AW7CTT1LpUHXYh4l-izrNE2Ln_samW5M/view?usp=drive_link/'">
+              Download CV
+            </button>
+               
+            <!-- contact -->
+
+            <button class="btn btn-color-1" onclick="location.href='./#contact'">
+              Contact Info
+            </button>
+          </div>
+
+             <!-- social media -->
+
+          <div id="socials-container">
+            <a href="https://www.linkedin.com/in/puneeth-gowda-7a31bb266/"><i class="fa-brands fa-linkedin-in icon"></i></a>
+            <a href="https://github.com/puneethgowda25"><i class="fa-brands fa-github icon"></i></a>
+            <a href="https://leetcode.com/puneethgowda1/"><i class="fa-brands fa-free-code-camp icon"></i></a>
+            <a href="https://www.instagram.com/puneeth_gowda25/"><i class="fa-brands fa-instagram icon"></i></a>
+
+           
+          </div>
+        </div>
+      </section>
+    
+      <!-------------------- about section ----------------------->
+
+    </section>
+    <section id="about">
+
+      <p class="section__text__p1">Get To Know More</p>
+      <h1 class="title">About Me</h1>
+      <div class="section-container">
+
+        <!-- picture -->
+
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <!-- <i class="fa-solid fa-certificate icon"></i> -->
+              <img
+                src="./assets/experience.png"
+                alt="Experience icon"
+                class="icon"
+              />
+              <h3>Experience</h3>
+              <p> Fresher</p> <br />Frontend Development</p>
+            </div>
+            <div class="details-container">
+
+              <!-- <i class="fa-solid fa-school icon"></i> -->
+
+              <img
+                src="./assets/education.png"
+                alt="Education icon"
+                class="icon"
+              />
+              <h3>Education</h3>
+              <p>B.E Bachelors Degree,<br />BMSCE</p>
+            </div>
+          </div>
+          <div class="text-container">
+            <p>
+              "I'm passionate about crafting digital experiences that captivate and inspire. With a keen eye for detail and a love for clean design, I bring creativity and expertise to every project I undertake. Let's collaborate and bring your vision to life!"
+            
+            </p>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#experience'"
+      />
+    </section>
+
+    <!------------- skills section ---------------->
+
+    <section id="experience">
+      <p class="section__text__p1"> My</p>
+      <h1 class="title">Experience</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <h2 class="experience-sub-title">Languages</h2>
+            <div class="article-container">
+
+              <article>
+
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>C++</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>JAVA</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+             
+              <article>
+
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>HTML</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>CSS</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+             
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>JavaScript</h3>
+                  <p>Basic</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Flutter</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+            
+            </div>
+          </div>
+          <div class="details-container">
+            <h2 class="experience-sub-title">Database and Framework</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>My SQL</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Flutter</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>React JS</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Git, Github</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#projects'"
+      />
+    </section>
+
+    <!--------------- projects section ------------------->
+
+    <section id="projects">
+      <p class="section__text__p1">Browse My Recent</p>
+      <h1 class="title">Projects</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+
+          <!-- project - 1 -->
+
+          <div class="details-container color-container">
+
+            <div class="article-container">
+              <img
+                src="./assets/project-1.png"
+                alt="Project 1"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">JOBZZ</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/puneethgowda25/JOBZZ'"
+              >
+                Github
+              </button>
+              <!-- <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Live Demo
+              </button> -->
+            </div>
+          </div>
+
+          <!-- project - 2 -->
+          <div class="details-container color-container">
+
+            <div class="article-container">
+              <img
+                src="./assets/project-2.png"
+                alt="Project 1"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">drowsiness detection</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://drive.google.com/file/d/1obJxyYb0yvrffqCpPnuwAWKdBKzVtD77/view?usp=drive_link'">
+              
+                More info
+              </button>
+              <!-- <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Live Demo
+              </button> -->
+            </div>
+          </div>
+         
+         
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#contact'"
+      />
+    </section>
+
+    <!-------------------- contact section --------------------->
+
+    <section id="contact">
+      <p class="section__text__p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+
+        <!-- emial link -->
+        <div class="contact-info-container">
+
+          
+          <a href="mailto:puneethgowda2525@gmail.com"><i class="fa-solid fa-envelope icon contact-icon email-icon"></i></a>
+
+          <p><a href="mailto:puneethgowda2525@gmail.com">puneethgowda2525@gmail.com</a></p>
+
+        </div>
+
+        <!-- linkedin link -->
+        <div class="contact-info-container">
+
+          <a href="https://www.linkedin.com/in/puneeth-gowda-7a31bb266/"><i class="fa-brands fa-linkedin-in icon contact-icon"></i></a>
+
+    
+          <p><a href="https://www.linkedin.com/in/puneeth-gowda-7a31bb266/">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!----------------------- footer secction ------------------------>
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2024 puneeth gowda. All Rights Reserved.</p>
+    </footer>
+
+      <!------ link script--------->
+
+      <script src="script.js"></script>
+</body>
+</html>
