@@ -71,7 +71,7 @@ pipeline {
         IMAGE_NAME = "anubharani/portfolio-website"
         IMAGE_TAG = "${BUILD_NUMBER}"
         GCP_ARTIFACT_IMAGE_NAME = "asia-south1-docker.pkg.dev/testing-bharani/portfolio-artifact-registry/portfolio-website"
-        SONAR_HOST_URL = "http://localhost:9000"
+        SONAR_HOST_URL = "http://192.168.1.100:9000" // or host.docker.internal
         SONAR_LOGIN = "sqp_05774885b0860b42024f00e7f8ceb99798190b95"
         SONAR_PROJECT_KEY = "portfolio-website"
     }
