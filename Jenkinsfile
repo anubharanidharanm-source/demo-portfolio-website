@@ -14,9 +14,11 @@ pipeline {
             }
         }
         stage('Lint or Validate') {
+            agent {
+            docker { image 'node:20-alpine' }
+            }
             steps {
                 sh '''
-                # Install node modules if not present
                 npm install -g htmlhint stylelint eslint
 
                 echo "Running HTMLHint..."
@@ -26,10 +28,10 @@ pipeline {
                 stylelint **/*.css
 
                 echo "Running ESLint..."
-                eslint **/*.js || true  # continue even if warnings
+                eslint **/*.js || true
                 '''
             }
-        }
+}
 
         stage('Build Docker Image') {
             steps {
