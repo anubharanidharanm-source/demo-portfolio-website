@@ -22,7 +22,6 @@ pipeline {
                         sonar-scanner \
                         -Dsonar.projectKey=portfolio-website \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://34.100.253.85:9000 \
                         -Dsonar.login=$SONAR_TOKEN
                         '''
                     }
@@ -65,14 +64,14 @@ pipeline {
             }
         }
 
-        // stage('Run Container') {
-        //     steps {
-        //         sh """
-        //         docker rm -f portfolio-container || true
-        //         docker run -d -p 8091:80 --name portfolio-container $IMAGE_NAME:$IMAGE_TAG
-        //         """
-        //     }
-        // }
+        stage('Run Container') {
+            steps {
+                sh """
+                docker rm -f portfolio-container || true
+                docker run -d -p 8091:80 --name portfolio-container $IMAGE_NAME:$IMAGE_TAG
+                """
+            }
+        }
             stage('Update GitOps Repo') {
                 steps {
                     withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
