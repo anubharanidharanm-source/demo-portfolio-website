@@ -16,14 +16,18 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                        sh '''
-                        sonar-scanner \
-                        -Dsonar.projectKey=portfolio-website \
-                        -Dsonar.sources=. \
-                        -Dsonar.login=$SONAR_TOKEN
-                        '''
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('SonarQube') {
+                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                            sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=portfolio-website \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://34.100.253.85:9000 \
+                            -Dsonar.login=$SONAR_TOKEN
+                            """
+                        }
                     }
                 }
             }
