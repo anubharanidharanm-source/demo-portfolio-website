@@ -135,14 +135,14 @@ pipeline {
             }
         }
 
-        stage('Run Container') {
-            steps {
-                sh """
-                docker rm -f portfolio-container || true
-                docker run -d -p 8091:80 --name portfolio-container $IMAGE_NAME:$IMAGE_TAG
-                """
-            }
-        }
+        // stage('Run Container') {
+        //     steps {
+        //         sh """
+        //         docker rm -f portfolio-container || true
+        //         docker run -d -p 8091:80 --name portfolio-container $IMAGE_NAME:$IMAGE_TAG
+        //         """
+        //     }
+        // }
 
         stage('Update GitOps Repo') {
             steps {
