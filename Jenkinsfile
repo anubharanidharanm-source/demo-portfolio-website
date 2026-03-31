@@ -32,6 +32,13 @@ pipeline {
                 }
             }
         }
+        stage('Code Quality Check') {
+            steps {
+                sh '''
+                htmlhint index.html || true
+                '''
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh """
@@ -42,7 +49,23 @@ pipeline {
                 """
             }
         }
-
+        stage('Docker Security Scan') {
+            steps {
+                sh '''
+                trivy image $IMAGE_NAME:$IMAGE_TAG
+                '''
+            }
+        }
+        stage('Test Container') {
+            steps {
+                sh '''
+                docker run -d -p 8085:80 --name test-container $IMAGE_NAME:$IMAGE_TAG
+                sleep 10
+                curl http://localhost:8085
+                docker rm -f test-container
+                '''
+            }
+        }
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
