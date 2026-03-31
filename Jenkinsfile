@@ -59,7 +59,27 @@ pipeline {
                 """
             }
         }
+            stage('Update GitOps Repo') {
+                steps {
+                    withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                        sh """
+                        rm -rf gitops-repo
+                        git clone https://$GIT_USER:$GIT_PASS@github.com/anubharanidharanm-source/Gitops-argoCD-repo.git gitops-repo
 
+                        cd gitops-repo
+
+                        sed -i "s|image: .*|image: $GCP_ARTIFACT_IMAGE_NAME:$IMAGE_TAG|g" portfolio-web-app.yaml
+
+                        git config user.email "jenkins@bharani.tech"
+                        git config user.name "jenkins"
+
+                        git add .
+                        git commit -m "Update image to version $IMAGE_TAG"
+                        git push origin main
+                        """
+                    }
+                }
+            }
     }
 }
 
